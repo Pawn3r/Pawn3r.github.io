@@ -9,14 +9,14 @@ theme: jekyll-theme-chirpy
 lang: en
 
 # Change to your timezone › https://kevinnovak.github.io/Time-Zone-Picker
-timezone:
+timezone: Asia/Saigon
 
 # jekyll-seo-tag settings › https://github.com/jekyll/jekyll-seo-tag/blob/master/docs/usage.md
 # ↓ --------------------------
 
-title: Chirpy # the main title
+title: PAWN # the main title
 
-tagline: A text-focused Jekyll theme # it will display as the sub-title
+tagline: A little blog of me # it will display as the sub-title
 
 description: >- # used by seo meta and the atom feed
   A minimal, responsive and feature-rich Jekyll theme for technical writing.
@@ -26,10 +26,10 @@ description: >- # used by seo meta and the atom feed
 url: ""
 
 github:
-  username: github_username # change to your github username
+  username: pawn3r # change to your github username
 
 twitter:
-  username: twitter_username # change to your twitter username
+  username: nevaR # change to your twitter username
 
 social:
   # Change to your full name.
@@ -116,7 +116,7 @@ pwa:
 paginate: 10
 
 # The base URL of your site
-baseurl: ""
+baseurl: "https://pawn3r.github.io"
 
 # ------------ The following options are not recommended to be modified ------------------
 
