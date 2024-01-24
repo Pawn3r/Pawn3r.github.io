@@ -1,4 +1,5 @@
 ---
 layout: post
-title:  "My second blog"
+title:  "Love, Pinky 🧸❤️"
 ---
+![alt text](assets/love.gif)

@@ -16,7 +16,9 @@ timezone: Asia/Saigon
 
 title: PAWN # the main title
 
-tagline: A little blog about computer, programiz, travel and dump things (づ๑•ᴗ•๑)づ♡  # it will display as the sub-title
+tagline:
+  Life is short, let's overfl0w it 👾
+  # it will display as the sub-title
 
 description: >- # used by seo meta and the atom feed
   A minimal, responsive and feature-rich Jekyll theme for technical writing.
@@ -35,7 +37,7 @@ social:
   # Change to your full name.
   # It will be displayed as the default author of the posts and the copyright owner in the Footer
   name: Pawn
-  email:  # change to your email address
+  email: # change to your email address
   links:
     # The first element serves as the copyright owner's link
     - https://twitter.com/locodoco15 # change to your twitter homepage
