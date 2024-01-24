@@ -1,6 +1,3 @@
-[**4\. Coding Basics**](https://maldevacademy.com/modules/4)
-================================================================
-
 ### **Introduction**
 
 As previously mentioned, this course requires a fundamental understanding of C as a prerequisite. With that being said, there are a few concepts that will be mentioned due to their importance throughout this course.
