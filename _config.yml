@@ -16,7 +16,7 @@ timezone: Asia/Saigon
 
 title: PAWN # the main title
 
-tagline: A little blog of me # it will display as the sub-title
+tagline: A little blog about computer, programiz, travel and dump things (づ๑•ᴗ•๑)づ♡  # it will display as the sub-title
 
 description: >- # used by seo meta and the atom feed
   A minimal, responsive and feature-rich Jekyll theme for technical writing.
@@ -34,12 +34,12 @@ twitter:
 social:
   # Change to your full name.
   # It will be displayed as the default author of the posts and the copyright owner in the Footer
-  name: your_full_name
-  email: example@domain.com # change to your email address
+  name: Pawn
+  email:  # change to your email address
   links:
     # The first element serves as the copyright owner's link
-    - https://twitter.com/username # change to your twitter homepage
-    - https://github.com/username # change to your github homepage
+    - https://twitter.com/locodoco15 # change to your twitter homepage
+    - https://github.com/Pawn3r # change to your github homepage
     # Uncomment below to add more social links
     # - https://www.facebook.com/username
     # - https://www.linkedin.com/in/username
@@ -63,7 +63,7 @@ google_analytics:
 #     light  - Use the light color scheme
 #     dark   - Use the dark color scheme
 #
-theme_mode: # [light|dark]
+theme_mode: dark
 
 # The CDN endpoint for images.
 # Notice that once it is assigned, the CDN url
@@ -73,7 +73,7 @@ theme_mode: # [light|dark]
 img_cdn:
 
 # the avatar on sidebar, support local or CORS resources
-avatar:
+avatar: https://64.media.tumblr.com/22f9bbbe51345f1668099dbb95d17168/tumblr_mjrwhterLZ1qc3plfo1_500.gifv
 
 # The URL of the site-wide social preview image used in SEO `og:image` meta tag.
 # It can be overridden by a customized `page.image` in front matter.
@@ -116,7 +116,7 @@ pwa:
 paginate: 10
 
 # The base URL of your site
-baseurl: "https://pawn3r.github.io"
+baseurl: ""
 
 # ------------ The following options are not recommended to be modified ------------------
 
