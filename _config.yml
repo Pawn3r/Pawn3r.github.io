@@ -75,7 +75,7 @@ theme_mode: dark
 img_cdn:
 
 # the avatar on sidebar, support local or CORS resources
-avatar: https://media4.giphy.com/media/DxNuRwfm4g2Z9cZwao/giphy.gif?cid=ecf05e47m4thcbl3vvu7s6mgh4j0dd7rd88du0kaz8yg2cfk&ep=v1_gifs_search&rid=giphy.gif&ct=g
+avatar: https://64.media.tumblr.com/22f9bbbe51345f1668099dbb95d17168/tumblr_mjrwhterLZ1qc3plfo1_500.gifv
 
 # The URL of the site-wide social preview image used in SEO `og:image` meta tag.
 # It can be overridden by a customized `page.image` in front matter.
