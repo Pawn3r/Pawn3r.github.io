@@ -1,9 +1,12 @@
+<<<<<<< HEAD:_posts/2024-01-25-Coding-Basics.md
 4. Coding Basics[****4. Coding Basics****](https://maldevacademy.com/modules/4)
 ===============================================================
 
 **Coding Basics**
 -----------------
 
+=======
+>>>>>>> 57be6c17e407c37a2a5232a6f7595396cd561f2e:_posts/2024-01-24-coding-basics.md
 ### **Introduction**
 
 As previously mentioned, this course requires a fundamental understanding of C as a prerequisite. With that being said, there are a few concepts that will be mentioned due to their importance throughout this course.
@@ -134,6 +137,7 @@ int main()
 
 Passing by reference is a method of passing arguments to a function where the argument is a pointer to the object, rather than a copy of the object's value. This means that when an argument is passed by reference, the memory address of the object is passed instead of the value of the object. The function can then access and modify the object directly, without creating a local copy of the object.
 
+<<<<<<< HEAD:_posts/2024-01-25-Coding-Basics.md
 
 ```
 void add(int *a, int *b, int *result)
@@ -158,3 +162,26 @@ int main()
    return 0;
 }
 ```
+=======
+    void add(int *a, int *b, int *result)
+    {
+    
+      int A = *a; // A is now the same value of a passed in from the main function
+      int B = *b; // B is now the same value of b passed in from the main function
+    
+      *result = B + A;
+    }
+    
+    int main()
+    {
+       int x = 5;
+       int y = 10;
+       int sum = 0;
+    
+       add(&x, &y, &sum);
+    
+       // 'sum' now is 15
+    
+       return 0;
+    }
+>>>>>>> 57be6c17e407c37a2a5232a6f7595396cd561f2e:_posts/2024-01-24-coding-basics.md
