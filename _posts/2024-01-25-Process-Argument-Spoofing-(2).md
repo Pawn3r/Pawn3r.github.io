@@ -1,0 +1,46 @@
+49. Process Argument Spoofing (2)# [**49. Process Argument Spoofing (2)**](https://maldevacademy.com/modules/49)
+
+## **Process Argument Spoofing (2)**
+
+### **Introduction**
+
+In the previous module, Procmon was tricked into logging the dummy command line arguments. However, the same technique does not work as well against some tools such as Process Hacker. The image below shows the result of argument spoofing in Process Hacker.
+
+[![](49%20Process%20Argument%20Spoofing%20(2)%200f4d524b53fa4b2b9d2b2a52376a158a/spoofing-109614220-d9136e16-4a7e-4ce2-a309-db47577d6f88.png)](49%20Process%20Argument%20Spoofing%20(2)%200f4d524b53fa4b2b9d2b2a52376a158a/spoofing-109614220-d9136e16-4a7e-4ce2-a309-db47577d6f88.png)The legitimate arguments are being exposed by Process Hacker along with a fragment of the dummy argument. This module will analyze why this occurs and provide a solution for it.
+
+### **Analyzing The Problem**
+
+To better understand why the legitimate arguments are exposed, the dummy argument will be set to `powershell.exe AAAAAAA...`.
+
+[![](49%20Process%20Argument%20Spoofing%20(2)%200f4d524b53fa4b2b9d2b2a52376a158a/spoofing-209614417-27d1960a-a101-4d6d-8247-e49c9a387556.png)](49%20Process%20Argument%20Spoofing%20(2)%200f4d524b53fa4b2b9d2b2a52376a158a/spoofing-209614417-27d1960a-a101-4d6d-8247-e49c9a387556.png)Checking Process Hacker again reveals that the legit and dummy arguments are logged.
+
+[![](49%20Process%20Argument%20Spoofing%20(2)%200f4d524b53fa4b2b9d2b2a52376a158a/spoofing-309614553-c8f18edc-301f-4bca-92e6-bf65ae03bddf.png)](49%20Process%20Argument%20Spoofing%20(2)%200f4d524b53fa4b2b9d2b2a52376a158a/spoofing-309614553-c8f18edc-301f-4bca-92e6-bf65ae03bddf.png)The use of `PEB->ProcessParameters.CommandLine.Buffer` to overwrite the payload can be exposed by Process Hacker and other tools such as [Process Explorer](https://learn.microsoft.com/en-us/sysinternals/downloads/process-explorer) because these tools use `NtQueryInformationProcess` to read the command line arguments of a process at runtime. Since this occurs at runtime, they can see what is currently inside `PEB->ProcessParameters.CommandLine.Buffer`.
+
+### **Solution**
+
+These tools read the `CommandLine.Buffer` up until the length specified by `CommandLine.Length`. They do not rely on `CommandLine.Buffer` being null-terminated because Microsoft states in [their documentation](https://learn.microsoft.com/en-us/windows/win32/api/subauth/ns-subauth-unicode_string) that `UNICODE_STRING.Buffer` might not be null-terminated.
+
+In short, these tools limit the number of bytes read from `CommandLine.Buffer` to be equal to `CommandLine.Length` in order to prevent reading additional unnecessary bytes in the event that `CommandLine.Buffer` is not null-terminated.
+
+[![](49%20Process%20Argument%20Spoofing%20(2)%200f4d524b53fa4b2b9d2b2a52376a158a/spoofing-409618296-d64a33d8-0d25-400f-9a2d-47d9483ec70f.png)](49%20Process%20Argument%20Spoofing%20(2)%200f4d524b53fa4b2b9d2b2a52376a158a/spoofing-409618296-d64a33d8-0d25-400f-9a2d-47d9483ec70f.png)It's possible to trick these tools by setting the `CommandLine.Length` to be less than what the buffer size is. This allows control over how much of the payload inside `CommandLine.Buffer` is exposed. This can be achieved by patching the `CommandLine.Length` address in the remote process, passing the desired size of the buffer to be read by the external tools.
+
+### **Patching CommandLine.Length**
+
+The following code snippet patches `PEB->ProcessParameters.CommandLine.Length` to limit what Process Hacker can read from `CommandLine.Buffer` only to `powershell.exe`. It works by first spoofing the argument to `Totally Legit Argument` then patching the length to be the size of `sizeof(L"powershell.exe")`.
+
+
+```
+DWORD dwNewLen = sizeof(L"powershell.exe");
+
+if (!WriteToTargetProcess(Pi.hProcess, ((PBYTE)pPeb->ProcessParameters + offsetof(RTL_USER_PROCESS_PARAMETERS, CommandLine.Length)), (PVOID)&dwNewLen, sizeof(DWORD))){
+  return FALSE;
+}
+
+```
+### **Demo**
+
+Process Hacker view.
+
+[![](49%20Process%20Argument%20Spoofing%20(2)%200f4d524b53fa4b2b9d2b2a52376a158a/spoofing-509622098-ebfd8016-9d4d-413f-929f-53e8465666dd.png)](49%20Process%20Argument%20Spoofing%20(2)%200f4d524b53fa4b2b9d2b2a52376a158a/spoofing-509622098-ebfd8016-9d4d-413f-929f-53e8465666dd.png)Procmon view.
+
+[![](49%20Process%20Argument%20Spoofing%20(2)%200f4d524b53fa4b2b9d2b2a52376a158a/spoofing-609622288-7f9400eb-100e-490a-a5a6-adbfa2b61f42.png)](49%20Process%20Argument%20Spoofing%20(2)%200f4d524b53fa4b2b9d2b2a52376a158a/spoofing-609622288-7f9400eb-100e-490a-a5a6-adbfa2b61f42.png)[51. String Hashing](49%20Process%20Argument%20Spoofing%20(2)%200f4d524b53fa4b2b9d2b2a52376a158a/51%20String%20Hashing%2067af0332497148fa85a9f95864996ede.html)
